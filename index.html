@@ -76,6 +76,20 @@
     source: "Pump.fun",
     formLink: "https://forms.gle/YOUR_FORM_LINK"
   };
+  async function fetchMarketCap() {
+  const response = await fetch(
+    "https://api.dexscreener.com/latest/dex/search/?q=DOGSHIT"
+  );
+  const data = await response.json();
+
+  if (data.pairs && data.pairs.length > 0) {
+    const mc = data.pairs[0].fdv;
+    document.getElementById("mc").innerText =
+      "Current MC: $" + mc.toLocaleString();
+  }
+}
+
+fetchMarketCap();
 
   document.getElementById("market").innerHTML = `
     <h3>📊 Active Market #${activeMarket.id}</h3>
