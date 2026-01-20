@@ -68,41 +68,55 @@
   </style>
 </head>
 <script>
-  const activeMarket = {
-    id: 1,
-    token: "$DOGSHIT",
-    targetMC: 10000000,
-    closeTime: "2026-01-22T18:00:00Z",
-    source: "Pump.fun",
-    formLink: "https://forms.gle/YOUR_FORM_LINK"
-  };
-  async function fetchMarketCap() {
-  const response = await fetch(
-    "https://api.dexscreener.com/latest/dex/search/?q=DOGSHIT"
-  );
-  const data = await response.json();
+  const markets = [
+    {
+      id: 1,
+      token: "$DOGSHIT",
+      targetMC: 10000000,
+      closeTime: "2026-01-22T18:00:00Z",
+      source: "Pump.fun",
+      formLink: "https://forms.gle/YOUR_FORM_LINK_1"
+    },
+    {
+      id: 2,
+      token: "$PEPE2",
+      targetMC: 5000000,
+      closeTime: "2026-01-23T12:00:00Z",
+      source: "Pump.fun",
+      formLink: "https://forms.gle/YOUR_FORM_LINK_2"
+    },
+    {
+      id: 3,
+      token: "$CATDOG",
+      targetMC: 2000000,
+      closeTime: "2026-01-24T09:00:00Z",
+      source: "Pump.fun",
+      formLink: "https://forms.gle/YOUR_FORM_LINK_3"
+    }
+  ];
 
-  if (data.pairs && data.pairs.length > 0) {
-    const mc = data.pairs[0].fdv;
-    document.getElementById("mc").innerText =
-      "Current MC: $" + mc.toLocaleString();
-  }
-}
+  const container = document.getElementById("markets");
 
-fetchMarketCap();
+  markets.forEach(market => {
+    const card = document.createElement("div");
+    card.className = "card";
 
-  document.getElementById("market").innerHTML = `
-    <h3>📊 Active Market #${activeMarket.id}</h3>
-    <p>
-    <p id="mc">Loading market cap...</p>
-      Will <strong>${activeMarket.token}</strong> hit
-      <strong>$${activeMarket.targetMC.toLocaleString()}</strong> market cap?
-    </p>
-    <p>⏰ Closes: ${activeMarket.closeTime}</p>
-    <p>📍 Source: ${activeMarket.source}</p>
-    <a class="btn" href="${activeMarket.formLink}">Enter Prediction</a>
-  `;
+    card.innerHTML = `
+      <h3>📊 Market #${market.id}</h3>
+      <p>
+        Will <strong>${market.token}</strong> hit
+        <strong>$${market.targetMC.toLocaleString()}</strong> market cap?
+      </p>
+      <p id="mc-${market.id}">Loading market cap...</p>
+      <p>⏰ Closes: ${market.closeTime}</p>
+      <p>📍 Source: ${market.source}</p>
+      <a class="btn" href="${market.formLink}">Enter Prediction</a>
+    `;
+
+    container.appendChild(card);
+  });
 </script>
+
 <body>
 
 <header>
@@ -111,8 +125,8 @@ fetchMarketCap();
 </header>
 
 <div class="container">
+  <div id="markets"></div>
 
-  <div class="card" id="market"></div>
 
   <div class="card">
     <h3>🏆 Leaderboard</h3>
