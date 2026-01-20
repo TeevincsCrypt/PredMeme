@@ -94,6 +94,7 @@ fetchMarketCap();
   document.getElementById("market").innerHTML = `
     <h3>📊 Active Market #${activeMarket.id}</h3>
     <p>
+    <p id="mc">Loading market cap...</p>
       Will <strong>${activeMarket.token}</strong> hit
       <strong>$${activeMarket.targetMC.toLocaleString()}</strong> market cap?
     </p>
