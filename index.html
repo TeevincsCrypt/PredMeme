@@ -67,6 +67,27 @@
     }
   </style>
 </head>
+<script>
+  const activeMarket = {
+    id: 1,
+    token: "$DOGSHIT",
+    targetMC: 10000000,
+    closeTime: "2026-01-22T18:00:00Z",
+    source: "Pump.fun",
+    formLink: "https://forms.gle/YOUR_FORM_LINK"
+  };
+
+  document.getElementById("market").innerHTML = `
+    <h3>📊 Active Market #${activeMarket.id}</h3>
+    <p>
+      Will <strong>${activeMarket.token}</strong> hit
+      <strong>$${activeMarket.targetMC.toLocaleString()}</strong> market cap?
+    </p>
+    <p>⏰ Closes: ${activeMarket.closeTime}</p>
+    <p>📍 Source: ${activeMarket.source}</p>
+    <a class="btn" href="${activeMarket.formLink}">Enter Prediction</a>
+  `;
+</script>
 <body>
 
 <header>
